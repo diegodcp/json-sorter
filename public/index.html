@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JSON Sorter | Format and Sort complex JSON Free</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Format and sort JSON objects FREE, quickly and securely. Compatible with complex JSONs with nested objects and arrays.">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/0dd9a78fa4.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js"></script>
+
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "JSON Sorter",
+          "url": "https://dcpdev.es/json-sorter",
+          "description": "Format and sort JSON objects FREE, quickly and securely. Compatible with complex JSONs with nested objects and arrays.",
+          "applicationCategory": "Utility",
+          "operatingSystem": "All",
+          "image": "https://dcpdev.es/logo.png",
+          "creator": {
+            "@type": "Organization",
+            "name": "DCPDev",
+            "url": "https://dcpdev.es"
+          }
+        }
+    </script>
+</head>
+<body class="flex flex-col items-center">
+
+    <header class="flex flex-row w-full top-0 mb-4 p-1 md:p-4 justify-between items-center text-white">
+        <section class="md:mb-0">
+            <h1 class="text-md text-color font-bold">JSON Sorter</h1>
+        </section>
+
+        <div class="flex items-center">
+            <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" 
+            data-slug="dcplab" data-color="#FFDD00" data-emoji="☕"  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" 
+            data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+
+            <button id="lightButton" class="rounded btn-theme ml-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon h-5 w-5"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+            </button>
+            <button id="darkButton" class="rounded btn-theme ml-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun h-5 w-5"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <div class="flex flex-col card-div p-2 md:p-6 rounded-lg shadow-lg w-full md:w-10/12">
+        <div class="flex flex-col">
+            <div class="flex justify-between">
+                <div class="w-full flex gap-2 text-[0.6rem] md:text-[1rem]">
+                    <select id="order" class="border p-2 mb-2 rounded w-16 button-secondary">
+                        <option value="asc">Asc</option>
+                        <option value="desc">Desc</option>
+                    </select>
+                    <div class="flex justify-center items-center border p-2 mb-2 rounded">
+                        <input type="checkbox" id="chkPlainArray" name="chkPlainArray" value="false">
+                        <label for="chkPlainArray" class="ml-1"> Order plain arrays</label>
+                    </div>
+                    <div class="flex justify-center items-center border p-2 mb-2 rounded">
+                        <input type="checkbox" id="chkIdentation" name="chkIdentation" value="false">
+                        <label for="chkIdentation" class="ml-1"> Tabs identation</label>
+                    </div>
+                    <div class="flex justify-center items-center border p-2 mb-2 rounded">
+                        <input type="checkbox" id="chkArb" name="chkArb" value="false">
+                        <label for="chkArb" class="ml-1"> ARB file</label>
+                    </div>
+                </div>
+
+                <button id="clearButton" class="bg-red-500 hidden md:block text-white px-4 mb-2 rounded">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            </div>
+            
+            <div class="flex flex-col md:flex-row h-screen md:h-[30rem] gap-4">
+                <div class="flex flex-col w-full h-full md:w-1/2">
+                    <textarea id="inputJson" class="w-full h-full p-2 border rounded area-color text-area" placeholder="Enter your JSON text..."></textarea>
+                    <section class="flex w-full justify-between mt-4">
+                        <button id="sortButton" class="button-color px-10 py-2 rounded">Sort</button>
+
+                        <button id="clearButton" class="bg-red-500 block md:hidden text-white px-4 rounded">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </section>
+                </div>
+                <div class="flex flex-col w-full h-full md:w-1/2">
+                    <textarea id="outputJson" class="w-full h-full p-2 border rounded area-color text-area bg-gray-200" readonly></textarea>
+                    <section class="flex w-full mt-4 justify-end">
+                        <button id="copyButton" class="button-color px-4 py-2 rounded">
+                            <i class="fa-solid fa-copy"></i> Copy
+                        </button>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <section class="flex flex-col items-center justify-center mt-32 mb-16">
+        <h1 class="text-6xl text-color font-bold mb-4">JSON Sorter</h1>
+        <h3 class="text-3xl text-color text-center">Format and sort your JSON data online securely.</h3>
+    </section>
+
+    <main class="grid grid-cols-1 md:grid-cols-3 gap-4 px-4 my-20 md:px-0 w-11/12 md:w-10/12">
+        <div class="card p-4 rounded">
+            <h2 class="w-full text-center text-xl font-bold mb-5">The Ultimate JSON Sorting Tool</h2>
+            <p>JSON Sorter is the best FREE online solution for organizing complex JSON objects. Whether you're dealing with deeply nested structures or intricate arrays, this tool ensures your data is perfectly sorted and easy to manage.</p>
+            <p>Tailor the sorting process to your needs, choose between spaces or tabs for indentation, decide whether to sort plain arrays, and even toggle advanced features like ARB file support with a simply and intuitive UI.</p>
+        </div>
+        <div class="card p-4 rounded">
+            <h2 class="w-full text-center text-xl font-bold mb-5">Flutter ARB support</h2>
+            <p>Need to work with Flutter localization files? JSON Sorter supports ARB files, ensuring your @@locale and comments stay intact while keeping everything neatly organized.</p>
+        </div>
+        <div class="card p-4 rounded">
+            <h2 class="w-full text-center text-xl font-bold mb-5">Effortless JSON Comparison</h2>
+            <p>With JSON Sorter, simplify the process of comparing JSON files. By sorting keys alphabetically and arrays by value, you can easily spot differences and ensure consistency across your projects.</p>
+            <p>This makes it an ideal tool for version control, code reviews, and collaborative development environments where maintaining clean and organized JSON is crucial.</p>
+        </div>
+    </main>
+
+    <div class="flex flex-col text-color my-6 p-6 rounded-lg shadow-lg w-11/12 md:w-10/12">
+        <h2 class="text-xl font-bold w-full text-center mt-1 mb-6">About JSON-Sorter</h2>
+        <p class="text-md mb-2">JSON (JavaScript Object Notation) is a lightweight data-interchange format that is useful for exchanging data from client to server, or from server to client.</p>
+        <p class="text-md mb-2">JSON-Sorter allows you to sort key names and key values, which can be alphabetical or numerical values, and can be sorted in ascending or descending order.</p>
+        <p class="text-md mb-2">Sorting JSON data makes it easier to understand for developers and users when dealing with large or complex JSON structures.</p>
+        <p class="text-md mb-2">It is very useful to guarantees order, compare and differentiate JSON data.</p>
+        <p class="text-md mb-6">The JSON-Sorter tool is secure, free and it is supported in Chrome, Firefox, Safari, and Edge.</p>
+        
+        <h2 class="text-xl font-bold w-full text-center mt-1 my-8">How do you use the JSON Sorter tool?</h2>
+        <p class="text-md mb-1">Enter your JSON into the first text area, then select the sort method (ascending or descending), click the 'Sort' button and the result will automatically format, sort and display in the output text area.</p>
+
+        <p class="text-md mt-12">I hope JSON Sorter is being useful, you are welcome to support its constant development and growth, 
+            any contribution will motivate me to continue improving the platform, creating products and growing together. 
+            Thank you very much for using JSON Sorter!</p>
+        <div class="flex w-full justify-center mt-6">
+            <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" 
+                data-slug="dcplab" data-color="#FFDD00" data-emoji="☕"  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" 
+                data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+        </div>
+    </div>
+
+    <footer class="flex items-center justify-center footer my-12 mx-4 md:mx-0 rounded">
+        <div class="">
+            <p>JSON Sorter. Created by dcpdev.</p>
+        </div>
+    </footer>
+</body>
+</html>
